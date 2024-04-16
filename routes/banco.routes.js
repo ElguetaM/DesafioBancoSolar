@@ -32,11 +32,11 @@ router.post("/usuario", async (req, res) => {
 
 //Editar Usuario//
 router.put("/usuario", async (req, res) => {
-  const { nombre, balance, id } = Object.values(req.body);
-  const usuario = [nombre, balance, id];
-  //console.log(usuario);
-  const newEdit = await editUsuario(usuario);
-  res.json(newEdit);
+  const { id } = req.query;
+  const { name, balance } = req.body;
+  const usuario = [name, balance, id];
+  const result = await editUsuario(usuario);
+  res.json(result);
 });
 
 //Eliminar Usuario//
@@ -48,12 +48,16 @@ router.delete("/usuario", async (req, res) => {
 
 //Hacer Transferencia//
 router.post("/transferencia", async (req, res) => {
-
+  const data = Object.values(req.body);
+  const usuario = await transferencia(data);
+  res.json(usuario);
 });
 
 //Ver Transferencias//
 router.get("/transferencias", async (req, res) => {
-
+  const data = Object.values(req.body);
+  const usuario = await getTransferencias(data);
+  res.json(usuario);
 });
 
 //ver 404//

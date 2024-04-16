@@ -27,12 +27,11 @@ const newUsuario = async (nombre, balance) => {
   }
 };
 
-const editUsuario = async (nombre, balance, id) => {
-  console.log(nombre, balance, id);
+const editUsuario = async (datos) => {
   try {
     const query = {
       text: "UPDATE usuarios SET nombre = $1, balance = $2 WHERE id = $3 RETURNING *",
-      values: [nombre, balance, id],
+      values: datos,
     };
     const res = await pool.query(query);
     return res.rows;
@@ -55,11 +54,27 @@ const deleteUsuario = async (id) => {
 };
 
 const transferencia = async (data) => {
-
+  //     const
+  //   try {
+  //       await pool.query('begin');
+  //       await pool.query(query);
+  //     const res = await pool.query(query);
+  //     return res.rows;
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
 };
 
 const getTransferencias = async () => {
-
+  try {
+    const query = {
+      text: "SELECT * FROM transferencias",
+    };
+    const res = await pool.query(query);
+    return res.rows;
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export {

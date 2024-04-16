@@ -12,7 +12,7 @@ const getUsuario = async () => {
   }
 };
 
-const newUsuario = async ([nombre, balance]) => {
+const postUsuario = async ([nombre, balance]) => {
   try {
     const query = {
       text: `INSERT INTO usuarios (nombre, balance) VALUES ($1, $2) RETURNING *`,
@@ -51,7 +51,7 @@ const deleteUsuario = async (id) => {
   }
 };
 
-const transferencia = async ([emisor, receptor, monto]) => {
+const newTransferencia = async ([emisor, receptor, monto]) => {
   const { id: emisorId } = (
     await pool.query(`SELECT * FROM usuarios WHERE nombre = '${emisor}'`)
   ).rows[0];
@@ -69,7 +69,6 @@ const transferencia = async ([emisor, receptor, monto]) => {
     text: `UPDATE usuarios SET balance = balance - $2 WHERE nombre = $1 RETURNING *`,
     values: [emisor, monto],
   };
-  console.log(updAccount1);
 
   const updAccount2 = {
     text: `UPDATE usuarios SET balance = balance + $2 WHERE nombre = $1 RETURNING *`,
@@ -89,7 +88,7 @@ const transferencia = async ([emisor, receptor, monto]) => {
   }
 };
 
-const getTransferencias = async () => {
+const getTransfere = async () => {
   try {
     const query = {
       text: "SELECT tr.fecha, em.nombre AS emisor, re.nombre AS receptor, tr.monto FROM transferencias tr JOIN usuarios em ON tr.emisor = em.id JOIN usuarios re ON tr.receptor = re.id",
@@ -103,10 +102,10 @@ const getTransferencias = async () => {
 };
 
 export {
-  newUsuario,
-  deleteUsuario,
-  editUsuario,
+  postUsuario,
   getUsuario,
-  transferencia,
-  getTransferencias,
+  editUsuario,
+  deleteUsuario,
+  newTransferencia,
+  getTransfere,
 };

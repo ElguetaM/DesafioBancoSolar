@@ -1,12 +1,12 @@
 import { Router } from "express";
 import {
-  newUsuario,
-  deleteUsuario,
-  editUsuario,
-  getUsuario,
-  transferencia,
+  postUser,
+  deleteUser,
+  putUser,
+  getUser,
+  postTransferencia,
   getTransferencias,
-} from "../controllers/banco.controllers.js";
+} from "../querys/banco.query.js";
 import path from "path";
 
 const router = Router();
@@ -18,46 +18,22 @@ router.get("/", async (req, res) => {
 });
 
 //Ver Usuarios//
-router.get("/usuarios", async (req, res) => {
-  const usuarios = await getUsuario();
-  res.json(usuarios);
-});
+router.get("/usuarios", getUser);
 
 //Agregar Usuario//
-router.post("/usuario", async (req, res) => {
-  const data = Object.values(req.body);
-  const usuario = await newUsuario(data);
-  res.json(usuario);
-});
+router.post("/usuario", postUser);
 
 //Editar Usuario//
-router.put("/usuario", async (req, res) => {
-  const { id } = req.query;
-  const { name, balance } = req.body;
-  const usuario = [name, balance, id];
-  const result = await editUsuario(usuario);
-  res.json(result);
-});
+router.put("/usuario", putUser);
 
 //Eliminar Usuario//
-router.delete("/usuario", async (req, res) => {
-  const { id } = req.query;
-  const usuario = await deleteUsuario(id);
-  res.json(usuario);
-});
+router.delete("/usuario", deleteUser);
 
 //Hacer Transferencia//
-router.post("/transferencia", async (req, res) => {
-  const data = Object.values(req.body);
-  const usuario = await transferencia(data);
-  res.json(usuario);
-});
+router.post("/transferencia", postTransferencia);
 
 //Ver Transferencias//
-router.get("/transferencias", async (req, res) => {
-  const usuario = await getTransferencias();
-  res.json(usuario);
-});
+router.get("/transferencias", getTransferencias);
 
 //ver 404//
 router.get("*", async (req, res) => {

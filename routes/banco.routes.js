@@ -27,7 +27,7 @@ router.get("/usuarios", async (req, res) => {
 router.post("/usuario", async (req, res) => {
   const data = Object.values(req.body);
   const usuario = await newUsuario(data);
-  res.send(usuario);
+  res.json(usuario);
 });
 
 //Editar Usuario//
@@ -55,8 +55,7 @@ router.post("/transferencia", async (req, res) => {
 
 //Ver Transferencias//
 router.get("/transferencias", async (req, res) => {
-  const data = Object.values(req.body);
-  const usuario = await getTransferencias(data);
+  const usuario = await getTransferencias();
   res.json(usuario);
 });
 

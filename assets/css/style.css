@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#bod {
+  background: #e5e1dd;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  color: #000000c7;
+  padding-top: 10vh;
+  text-align: center;
+}
+
+.title1 {
+  font-size: 100px;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.title2 {
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.message1 {
+  font-size: 24px;
+}
